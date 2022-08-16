@@ -53,5 +53,23 @@
         public abstract static function listar($tipo = 0, $info = "");
         public abstract function editar();
         public abstract function excluir();
+
+        public function __toString(){
+            return "<table border='1'>
+                        <tr>
+                            <td> Título: </td> <td>".$this->getTitulo()."</td>
+                        </tr>
+                        <tr>
+                            <td> Resumo: </td> <td>".$this->getResumo()."</td>
+                        </tr>
+                        <tr>
+                            <td> Avaliação: </td> <td>".number_format($this->getAvaliacao(), 2, ",", ".")."</td>
+                        </tr>
+                        <tr>
+                            <td> Autores: </td> <td>".$this->getAutores()."</td>
+                        </tr>";
+        }
+
+        public abstract function avaliar($id, $nota);
     }
 ?>

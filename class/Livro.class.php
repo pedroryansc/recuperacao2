@@ -30,11 +30,11 @@
             if($tipo > 0 && $info <> ""){
                 switch($tipo){
                     case(1): $sql .= " WHERE idlivro = :info"; break;
-                    case(2): $sql .= " WHERE titulo = :info"; $info = "%".$info."%"; break;
-                    case(3): $sql .= " WHERE resumo = :info"; $info = "%".$info."%"; break;
-                    case(4): $sql .= " WHERE avaliacao = :info"; $info = "%".$info."%"; break;
-                    case(5): $sql .= " WHERE autores = :info"; $info = "%".$info."%"; break;
-                    case(6): $sql .= " WHERE ano_publicacao = :info"; $info = "%".$info."%"; break;
+                    case(2): $sql .= " WHERE titulo LIKE :info"; $info = "%".$info."%"; break;
+                    case(3): $sql .= " WHERE resumo LIKE :info"; $info = "%".$info."%"; break;
+                    case(4): $sql .= " WHERE avaliacao LIKE :info"; $info = "%".$info."%"; break;
+                    case(5): $sql .= " WHERE autores LIKE :info"; $info = "%".$info."%"; break;
+                    case(6): $sql .= " WHERE ano_publicacao LIKE :info"; $info = "%".$info."%"; break;
                 }
                 $par = array(":info"=>$info);
             } else
@@ -55,6 +55,22 @@
         public function excluir(){
             $sql = "DELETE FROM livro WHERE idlivro = :id";
             $par = array(":id"=>$this->getId());
+            return parent::executaComando($sql, $par);
+        }
+
+        public function __toString(){
+            return parent::__toString().
+                        "<tr>
+                            <td> Ano de publicação: </td> <td>".$this->getAnoPublicacao()."</td>
+                        </tr>
+                    </table>";
+        }
+
+        public function avaliar($id, $nota){
+            $vetor = self::listar(1, $id);
+            $novaAvaliacao = ($vetor[0]["avaliacao"] + $nota) / 2;
+            $sql = "UPDATE livro SET avaliacao = :novaAvaliacao WHERE idlivro = :id";
+            $par = array(":novaAvaliacao"=>$novaAvaliacao, ":id"=>$id);
             return parent::executaComando($sql, $par);
         }
     }
