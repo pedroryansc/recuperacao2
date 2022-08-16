@@ -5,7 +5,7 @@ CREATE TABLE livro(
     titulo varchar(45),
     resumo varchar(250),
     avaliacao decimal(6,2),
-    autores varchar(250)
+    autores varchar(250),
     ano_publicacao INT);
 
 CREATE TABLE revista(

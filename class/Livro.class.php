@@ -49,6 +49,13 @@
                     WHERE idlivro = :id";
             $par = array(":titulo"=>$this->getTitulo(), ":resumo"=>$this->getResumo(), ":avaliacao"=>$this->getAvaliacao(),
                         ":autores"=>$this->getAutores(), ":ano_publicacao"=>$this->getAnoPublicacao(), "id"=>$this->getId());
+            return parent::executaComando($sql, $par);
+        }
+
+        public function excluir(){
+            $sql = "DELETE FROM livro WHERE idlivro = :id";
+            $par = array(":id"=>$this->getId());
+            return parent::executaComando($sql, $par);
         }
     }
 ?>
