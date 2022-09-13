@@ -11,13 +11,13 @@
         }
 
         public function setVolume($volume){
-            if($volume <> 0)
+            if($volume > 0)
                 $this->volume = $volume;
             else
                 throw new Exception("Insira o volume, por favor.");
         }
         public function setQuantAvaliacoes($quant_avaliacoes){
-            if($quant_avaliacoes <> 0)
+            if($quant_avaliacoes >= 0)
                 $this->quant_avaliacoes = $quant_avaliacoes;
             else
                 throw new Exception("Insira a quantidade de avaliações, por favor.");

@@ -31,7 +31,7 @@
                 throw new Exception("Insira o resumo, por favor.");
         }
         public function setAvaliacao($avaliacao){
-            if($avaliacao <> 0)
+            if($avaliacao >= 0)
                 $this->avaliacao = $avaliacao;
             else
                 throw new Exception("Insira a avaliação, por favor.");
